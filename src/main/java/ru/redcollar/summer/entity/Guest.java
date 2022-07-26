@@ -1,15 +1,23 @@
-package ru.redcollar.home.entity;
+package ru.redcollar.summer.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import java.util.Set;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 public class Guest {
 
     @Id
@@ -21,7 +29,7 @@ public class Guest {
     private Boolean isStudent;
     private String jobName;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "guest_talk",
             joinColumns = @JoinColumn(name = "talk_id"),
             inverseJoinColumns = @JoinColumn(name = "guest_id"))
